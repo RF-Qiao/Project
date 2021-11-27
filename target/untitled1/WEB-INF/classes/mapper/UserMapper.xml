@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feng.dao.EmployeeMapper">
+    <select id="findAllEmployee" resultType="com.feng.pojo.Employee" >
+        select
+            *
+            from project_one.users
+    </select>
+
+    <insert id="addEmployee" parameterType="com.feng.pojo.Employee">
+        insert into
+            project_one.users (id,username,password,gender,mobile,birthday,created_time)
+        values
+            (null,#{username},#{password},#{gender},#{mobile},#{birthday},#{created_time});
+    </insert>
+
+    <delete id="deleteEmployee" >
+        delete from
+                    project_one.users
+        where
+              id=#{id}
+    </delete>
+
+    <update id="updateEmployee" parameterType="com.feng.pojo.Employee">
+        update project_one.users
+        set username = #{username},
+            password=#{password},
+            gender=#{gender},
+            mobile=#{mobile},
+            birthday=#{birthday},
+            created_time=#{created_time}
+        where id=#{id};
+    </update>
+
+    <insert id="registEmployee" parameterType="com.feng.pojo.Employee">
+        insert into
+            project_one.users(id,username,password,gender,mobile,birthday,created_time)
+        values
+            (null,#{username},#{password},#{gender},#{mobile},#{birthday},#{created_time});
+    </insert>
+    <select id="login" resultType="com.feng.pojo.Employee">
+        SELECT username, password FROM project_one.users WHERE
+                username = #{username} AND password=#{password}
+    </select>
+</mapper>
