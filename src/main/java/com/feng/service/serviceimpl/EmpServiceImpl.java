@@ -1,16 +1,12 @@
 package com.feng.service.serviceimpl;
 
-
-import com.feng.Util.MybatisUtils;
+import com.feng.util.MybatisUtils;
 import com.feng.dao.EmployeeMapper;
 import com.feng.pojo.Employee;
 import com.feng.service.EmpService;
-
-import java.util.Date;
 import java.util.List;
 public class EmpServiceImpl implements EmpService {
-    EmployeeMapper mapper= MybatisUtils.getSqlSession()
-                                .getMapper(EmployeeMapper.class);
+    EmployeeMapper mapper= MybatisUtils.getSqlSession().getMapper(EmployeeMapper.class);
 
     @Override
     public int addEmployee(Employee employee) {
@@ -33,21 +29,19 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public Employee createEmployee(Employee employee) {
-        employee.setId(0);
-        employee.setUsername(employee.getUsername());
-        employee.setPassword(employee.getPassword());
-        employee.setGender(0);
-        employee.setMobile("123456");
-        employee.setBirthday(null);
-        employee.setCreated_time(new Date());
-        return mapper.registEmployee(employee);
+    public Integer createEmployee(String username, String password) {
+        return mapper.registEmployee(username,password);
     }
 
     @Override
-    public int login(String username, String password) {
+    public Employee login(String username, String password) {
 
        return mapper.login(username,password);
+    }
+
+    @Override
+    public Employee userIsExist(String username) {
+       return mapper.usernameIsExist(username);
     }
 
 

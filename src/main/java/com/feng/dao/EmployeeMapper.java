@@ -31,17 +31,25 @@ import java.util.List;
         List<Employee> findAllEmployee();
         /**
          * 注册用户
-         * @param employee
+         * @param username
+         * @param password
          * @return
          */
-        Employee registEmployee(Employee employee);
-
+        Integer registEmployee(@Param("username") String username,
+                                  @Param("password") String password);
         /**
          * 用户登录
          * @param username
          * @param password
          * @return
          */
-        int login(@Param("username") String username,
+        Employee login(@Param("username") String username,
                   @Param("password") String password);
+
+        /**
+         * 判断用户名是否存在
+         * @param username
+         * @return
+         */
+        Employee usernameIsExist(String username);
     }

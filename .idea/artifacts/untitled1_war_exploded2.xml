@@ -19,6 +19,7 @@
       <element id="library" level="project" name="untitled1" />
       <element id="javaee-facet-resources" facet="untitled1/web/Web" />
       <element id="artifact" artifact-name="untitled1:war exploded" />
+      <element id="artifact" artifact-name="untitled1:war" />
     </root>
   </artifact>
 </component>

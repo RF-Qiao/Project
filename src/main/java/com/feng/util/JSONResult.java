@@ -1,5 +1,7 @@
-package com.feng.Util;
+package com.feng.util;
 
+
+import java.io.Serializable;
 
 /**
  *
@@ -11,8 +13,7 @@ package com.feng.Util;
  * 				555：异常抛出信息
  * 				556: 用户qq校验异常
  */
-public class JSONResult {
-
+public class JSONResult implements Serializable {
 
     // 响应业务状态
     private Integer status;
@@ -58,8 +59,8 @@ public class JSONResult {
         return new JSONResult(556, msg, null);
     }
 
-    public JSONResult() {
-
+    public JSONResult(String msg) {
+        this.msg=msg;
     }
 
     public JSONResult(Integer status, String msg, Object data) {
@@ -69,7 +70,7 @@ public class JSONResult {
     }
 
 
-    public JSONResult(Object data) {
+    public JSONResult(Object data){
         this.status = 200;
         this.msg = "OK";
         this.data = data;
@@ -102,7 +103,4 @@ public class JSONResult {
     public void setData(Object data) {
         this.data = data;
     }
-
-
-
 }

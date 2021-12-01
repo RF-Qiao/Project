@@ -1,4 +1,4 @@
-package com.feng.Util;
+package com.feng.util;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -19,7 +19,6 @@ public class MybatisUtils {
         }
         sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
     }
-
     //获取SqlSession
     public static SqlSession getSqlSession(){
         SqlSession sqlSession = threadLocal.get();
@@ -31,12 +30,12 @@ public class MybatisUtils {
     }
 
     //关闭SqlSession
-    public static void closeSqlSession(){
-        SqlSession sqlSession = threadLocal.get();
-        if(sqlSession != null){
-            sqlSession.commit();
-            sqlSession.close();
-            threadLocal.set(null);
-        }
-    }
+//    public static void closeSqlSession(){
+//        SqlSession sqlSession = threadLocal.get();
+//        if(sqlSession != null){
+//            sqlSession.commit();
+//            sqlSession.close();
+//            threadLocal.set(null);
+//        }
+//    }
 }

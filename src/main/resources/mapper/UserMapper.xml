@@ -7,6 +7,7 @@
         select
             *
             from project_one.users
+        where Role=0
     </select>
 
     <insert id="addEmployee" parameterType="com.feng.pojo.Employee">
@@ -36,12 +37,18 @@
 
     <insert id="registEmployee" parameterType="com.feng.pojo.Employee">
         insert into
-            project_one.users(id,username,password,gender,mobile,birthday,created_time)
+            project_one.users(id,username,password)
         values
-            (null,#{username},#{password},#{gender},#{mobile},#{birthday},#{created_time});
+            (null,#{username},#{password});
     </insert>
+
     <select id="login" resultType="com.feng.pojo.Employee">
-        SELECT username, password FROM project_one.users WHERE
+        SELECT username, password ,role FROM project_one.users WHERE
                 username = #{username} AND password=#{password}
+    </select>
+
+    <select id="usernameIsExist" resultType="com.feng.pojo.Employee" >
+        select * from project_one.users
+        where username =#{username}
     </select>
 </mapper>

@@ -17,4 +17,5 @@ public class Employee {
     private String mobile; // 手机号
     private Date birthday; // 出生日期
     private Date created_time; // 创建时间
+    private int role; //用户权限 0为普通用户 1为管理员
 }

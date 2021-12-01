@@ -3,8 +3,6 @@ package com.feng.service;
 import com.feng.pojo.Employee;
 
 import java.util.List;
-
-
 public interface EmpService {
     /**
      * 添加客户
@@ -32,10 +30,11 @@ public interface EmpService {
 
     /**
      * 创建用户
-     * @param employee
+     * @param username
+     * @param password
      * @return
      */
-    Employee createEmployee(Employee employee);
+    Integer createEmployee(String username, String password);
 
     /**
      * 检测并登录信息
@@ -43,5 +42,12 @@ public interface EmpService {
      * @param password
      * @return
      */
-    int login(String username,String password);
+    Employee login(String username,String password);
+
+    /**
+     * 检测用户名是否存在
+     * @param username
+     * @return
+     */
+    Employee userIsExist(String username);
 }
