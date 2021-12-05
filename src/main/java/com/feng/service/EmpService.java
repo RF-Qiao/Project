@@ -1,6 +1,7 @@
 package com.feng.service;
 
 import com.feng.pojo.Employee;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 public interface EmpService {
@@ -50,4 +51,12 @@ public interface EmpService {
      * @return
      */
     Employee userIsExist(String username);
+
+    /**
+     * 判断用户名和密码是否正确
+     * @param username
+     * @param password
+     * @return
+     */
+    Employee userAndPasswordIsExist( String username,String password);
 }

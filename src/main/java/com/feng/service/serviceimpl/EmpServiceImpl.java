@@ -44,5 +44,10 @@ public class EmpServiceImpl implements EmpService {
        return mapper.usernameIsExist(username);
     }
 
+    @Override
+    public Employee userAndPasswordIsExist(String username, String password) {
+        return mapper.userAndPasswordIsExist(username,password);
+    }
+
 
 }

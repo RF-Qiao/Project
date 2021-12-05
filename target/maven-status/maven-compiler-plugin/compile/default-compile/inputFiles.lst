@@ -2,12 +2,14 @@ E:\untitled1\src\main\java\com\feng\dao\EmployeeMapper.java
 E:\untitled1\src\main\java\com\feng\pojo\Employee.java
 E:\untitled1\src\main\java\com\feng\service\serviceimpl\EmpServiceImpl.java
 E:\untitled1\src\main\java\com\feng\filter\EncodingFilter.java
+E:\untitled1\src\main\java\com\feng\util\GetDataUtils.java
+E:\untitled1\src\main\java\com\feng\controller\LoginController.java
 E:\untitled1\src\main\java\com\feng\controller\QueryController.java
 E:\untitled1\src\main\java\com\feng\service\EmpService.java
 E:\untitled1\src\main\java\com\feng\util\MybatisUtils.java
 E:\untitled1\src\main\java\com\feng\util\JSONResult.java
 E:\untitled1\src\main\java\com\feng\controller\PassportController.java
-E:\untitled1\src\main\java\com\feng\controller\deleteController.java
+E:\untitled1\src\main\java\com\feng\controller\DeleteController.java
 E:\untitled1\src\main\java\com\feng\controller\UpdateController.java
 E:\untitled1\src\main\java\com\feng\util\TokenUtils.java
 E:\untitled1\src\main\java\com\feng\controller\AddController.java

@@ -18,27 +18,29 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
     EmpServiceImpl empService= new EmpServiceImpl();
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp){
 
     }
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         login(req,resp);
     }
     private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String postData = GetDataUtils.getPostData(req);
         Employee employee = new Gson().fromJson(postData, Employee.class);
-
         String username = employee.getUsername();
         String password = employee.getPassword();
-        if (StringUtils.isBlank(username)){
-            resp.getWriter().write(new Gson().toJson(new JSONResult("用户名为空")));
+        if (StringUtils.isBlank(username)||StringUtils.isBlank(password)){
+            resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("用户名或密码为空")));
+            return;
         }
-        if (StringUtils.isBlank(password)) {
-            resp.getWriter().write(new Gson().toJson(new JSONResult("密码为空")));
+        Employee employee1 = empService.userAndPasswordIsExist(username, password);
+        if (employee1==null){
+            resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("用户名或密码不正确")));
+            return;
         }
-        Employee login = empService.login(username, password);
-        String token = TokenUtils.token(login.getId(), login.getRole());
+        Employee login = empService.login(username,password);
+        String token = TokenUtils.token(login.getId(),login.getRole());
         resp.getWriter().write(new Gson().toJson(new JSONResult(200, "登录成功", token)));
     }
 }

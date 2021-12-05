@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +30,7 @@ public class TokenUtils {
             token = JWT.create()
                     .withHeader(header)
                     .withClaim("id", id)
-                    .withClaim("role", role)
+                    .withClaim("role",role)
                     .withExpiresAt(date)
                     .sign(algorithm);
         } catch (Exception e) {
@@ -40,7 +39,6 @@ public class TokenUtils {
         }
         return "Bearer "+token;
     }
-
     public static Integer verify(String token) {
         /**
          * @desc 验证token，通过返回true

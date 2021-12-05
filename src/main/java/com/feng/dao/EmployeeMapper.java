@@ -4,8 +4,7 @@ import com.feng.pojo.Employee;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-    public interface EmployeeMapper {
+ public interface EmployeeMapper {
         /**
          * 添加客户
          * @param employee
@@ -44,7 +43,7 @@ import java.util.List;
          * @return
          */
         Employee login(@Param("username") String username,
-                  @Param("password") String password);
+                       @Param("password") String password);
 
         /**
          * 判断用户名是否存在
@@ -52,4 +51,7 @@ import java.util.List;
          * @return
          */
         Employee usernameIsExist(String username);
+
+        Employee userAndPasswordIsExist(@Param("username") String username,
+                                        @Param("password") String password);
     }

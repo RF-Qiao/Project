@@ -23,7 +23,7 @@ public class UpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)  {
 
-          }
+    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         updateEmployee(req,resp);
@@ -32,22 +32,23 @@ public class UpdateController extends HttpServlet {
     private void updateEmployee(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         //验证是否为管理员 如果verify==1 可以增加
         String authorization = req.getHeader("Authorization");
-        Integer verify = TokenUtils.verify(authorization);
+        if (authorization==null){
+            resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("没有登录，无法修改用户")));
+            return;
+        }
+        String substring = authorization.substring(7);
+        Integer verify = TokenUtils.verify(substring);
         if (verify==0){
-            resp.getWriter().write(new Gson().toJson(new JSONResult(500,"权限不足",null)));
+            resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("权限不足")));
             return;
         }
         String postData = GetDataUtils.getPostData(req);
         Employee employee1 = new Gson().fromJson(postData, Employee.class);
-        Employee employee = new Employee();
-        employee.setId(employee1.getId());
-        employee.setUsername(employee1.getUsername());
-        employee.setPassword(employee1.getPassword());
-        employee.setGender(employee1.getGender());
-        employee.setMobile(employee1.getMobile());
-        employee.setBirthday(new Date());
-        employee.setCreated_time(new Date());
-        empService.updateEmployee(employee);
+        int i = empService.updateEmployee(employee1);
+        if (i==0){
+            resp.getWriter().write(new Gson().toJson( JSONResult.errorMsg("修改失败,该用户不存在")));
+            return;
+        }
         resp.getWriter().write(new Gson().toJson(new JSONResult(200,"修改成功",null)));
     }
 }

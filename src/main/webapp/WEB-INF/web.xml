@@ -5,13 +5,6 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
-  <servlet>
-    <servlet-name>demo</servlet-name>
-    <servlet-class>com.feng.controller.PassportController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>demo</servlet-name>
-    <url-pattern>/hi</url-pattern>
-  </servlet-mapping>
+
 
 </web-app>

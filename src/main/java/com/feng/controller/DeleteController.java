@@ -2,6 +2,7 @@ package com.feng.controller;
 
 import com.feng.service.serviceimpl.EmpServiceImpl;
 import com.feng.util.JSONResult;
+import com.feng.util.TokenUtils;
 import com.google.gson.Gson;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,10 +22,24 @@ public class DeleteController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)  {
 
     }
-
     //删除用户
     private void deleteEmployee(HttpServletRequest req, HttpServletResponse resp
     ) throws IOException {
+        if (req.getParameter("id")==null){
+            resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("id为空")));
+            return;
+        }
+        String authorization = req.getHeader("Authorization");
+        if (authorization==null){
+            resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("没有登录，无法删除用户")));
+            return;
+        }
+        String substring = authorization.substring(7);
+        Integer verify = TokenUtils.verify(substring);
+        if (verify==0){
+            resp.getWriter().write(new Gson().toJson( JSONResult.errorMsg("权限不足")));
+            return;
+        }
         String id = req.getParameter("id");
         int i = empService.deleteEmployee(Integer.parseInt(id));
         resp.getWriter().write(new Gson().toJson(new JSONResult(200, i == 0 ? "删除失败" : "删除成功", null)));

@@ -4,6 +4,7 @@ import com.feng.pojo.Employee;
 import com.feng.service.serviceimpl.EmpServiceImpl;
 import com.feng.util.GetDataUtils;
 import com.feng.util.JSONResult;
+import com.feng.util.MD5;
 import com.google.gson.Gson;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,22 +20,20 @@ public class PassportController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         regist(req, resp);
     }
-
     private void regist(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String postData = GetDataUtils.getPostData(req);
         Employee employee = new Gson().fromJson(postData, Employee.class);
         Employee isExist = empService.userIsExist(employee.getUsername());
         if (isExist!=null){
-            resp.getWriter().write(new Gson().toJson(new JSONResult(500,"用户名已存在",null)));
+            resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("用户名已存在")));
             return;
         }
         String username = employee.getUsername();
-        String password = employee.getPassword();
+        String password = MD5.md5(employee.getPassword());
         resp.getWriter().write(new Gson().toJson(new JSONResult(200, empService.createEmployee(username, password) > 0 ? "注册成功，马上登录" : "注册失败", null)));
     }
 }
