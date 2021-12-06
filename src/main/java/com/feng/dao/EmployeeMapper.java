@@ -52,6 +52,12 @@ import java.util.List;
          */
         Employee usernameIsExist(String username);
 
+        /**
+         * 判断用户名和密码是否正确
+         * @param username
+         * @param password
+         * @return
+         */
         Employee userAndPasswordIsExist(@Param("username") String username,
                                         @Param("password") String password);
     }

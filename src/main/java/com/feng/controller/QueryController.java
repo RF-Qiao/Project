@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "Query", urlPatterns = "/query")
 public class QueryController extends HttpServlet {
+    static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     EmpServiceImpl empService = new EmpServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,6 +37,13 @@ public class QueryController extends HttpServlet {
         }
         String substring = authorization.substring(7);
         Integer verify = TokenUtils.verify(substring);
+        String format1 =(format.format(new Date()));
+        String format2 = format.format(TokenUtils.datadecode(substring));
+        int i = format1.compareTo(format2);
+        if (i>0){
+            resp.getWriter().write(new Gson().toJson( JSONResult.errorMsg("token验证过期，请重新认证")));
+            return;
+        }
         if (verify == 1){
             List<Employee> allEmployee = empService.findAllEmployee();
             resp.getWriter().write(new Gson().toJson(new JSONResult(200,"查询成功",allEmployee)));

@@ -22,6 +22,6 @@
     </environments>
     <!-- 将mapper文件加入到配置文件中 -->
     <mappers>
-        <mapper resource="mapper/UserMapper.xml" />
+        <mapper resource="mapper/EmployeeMapper.xml" />
     </mappers>
 </configuration>

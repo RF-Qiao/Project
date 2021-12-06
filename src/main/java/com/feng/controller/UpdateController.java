@@ -14,10 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @WebServlet(name = "update",urlPatterns = "/update")
 public class UpdateController extends HttpServlet {
+    static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     EmpServiceImpl empService =new EmpServiceImpl();
 
     @Override
@@ -38,14 +40,21 @@ public class UpdateController extends HttpServlet {
         }
         String substring = authorization.substring(7);
         Integer verify = TokenUtils.verify(substring);
+        String format1 =(format.format(new Date()));
+        String format2 = format.format(TokenUtils.datadecode(substring));
+        int i = format1.compareTo(format2);
+        if (i>1){
+            resp.getWriter().write(new Gson().toJson( JSONResult.errorMsg("token验证过期，请重新认证")));
+            return;
+        }
         if (verify==0){
             resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("权限不足")));
             return;
         }
         String postData = GetDataUtils.getPostData(req);
         Employee employee1 = new Gson().fromJson(postData, Employee.class);
-        int i = empService.updateEmployee(employee1);
-        if (i==0){
+        int i1 = empService.updateEmployee(employee1);
+        if (i1==0){
             resp.getWriter().write(new Gson().toJson( JSONResult.errorMsg("修改失败,该用户不存在")));
             return;
         }
