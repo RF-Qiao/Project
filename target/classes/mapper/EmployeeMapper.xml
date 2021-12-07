@@ -17,7 +17,7 @@
             (null,#{username},#{password},#{gender},#{mobile},#{birthday},#{created_time});
     </insert>
 
-    <delete id="deleteEmployee" >
+    <delete id="deleteEmployee" flushCache="true" >
         delete from
                     project_one.users
         where

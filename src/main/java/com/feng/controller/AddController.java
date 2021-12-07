@@ -17,7 +17,6 @@ import java.util.Date;
 public class AddController extends HttpServlet {
     static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     EmpServiceImpl empService = new EmpServiceImpl();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
     }
