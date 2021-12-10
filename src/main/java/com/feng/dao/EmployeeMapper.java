@@ -35,7 +35,7 @@ import java.util.List;
          * @return
          */
         Integer registEmployee(@Param("username") String username,
-                                  @Param("password") String password);
+                               @Param("password") String password);
         /**
          * 用户登录
          * @param username
@@ -50,7 +50,7 @@ import java.util.List;
          * @param username
          * @return
          */
-        Employee usernameIsExist(String username);
+        Integer usernameIsExist(String username);
 
         /**
          * 判断用户名和密码是否正确
@@ -58,6 +58,6 @@ import java.util.List;
          * @param password
          * @return
          */
-        Employee userAndPasswordIsExist(@Param("username") String username,
+        Integer userAndPasswordIsExist(@Param("username") String username,
                                         @Param("password") String password);
     }

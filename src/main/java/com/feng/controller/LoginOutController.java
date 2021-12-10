@@ -3,6 +3,7 @@ import com.feng.service.serviceimpl.EmpServiceImpl;
 import com.feng.util.JSONResult;
 import com.feng.util.TokenUtils;
 import com.google.gson.Gson;
+import lombok.val;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,15 +24,10 @@ public class LoginOutController  extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         String authorization = req.getHeader("Authorization");
         String substring = authorization.substring(7);
-        Date datadecode = TokenUtils.datadecode(substring);
-        String format = LoginOutController.format.format(new Date());
-        String format1 = LoginOutController.format.format(datadecode);
-        format1=format;
-
-        System.out.println("登出时间==============="+format1);
+        System.out.println("登出时间==============="+format);
         resp.getWriter().write(new Gson().toJson(new JSONResult(200,"等出成功",null)));
     }
 }

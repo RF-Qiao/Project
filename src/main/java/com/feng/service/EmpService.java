@@ -50,7 +50,7 @@ public interface EmpService {
      * @param username
      * @return
      */
-    Employee userIsExist(String username);
+    Integer userIsExist(String username);
 
     /**
      * 判断用户名和密码是否正确
@@ -58,5 +58,5 @@ public interface EmpService {
      * @param password
      * @return
      */
-    Employee userAndPasswordIsExist( String username,String password);
+    Integer userAndPasswordIsExist( String username,String password);
 }

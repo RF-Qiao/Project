@@ -40,12 +40,12 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public Employee userIsExist(String username) {
+    public Integer userIsExist(String username) {
        return mapper.usernameIsExist(username);
     }
 
     @Override
-    public Employee userAndPasswordIsExist(String username, String password) {
+    public Integer userAndPasswordIsExist(String username, String password) {
         return mapper.userAndPasswordIsExist(username,password);
     }
 

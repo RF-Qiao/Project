@@ -26,12 +26,26 @@
 
     <update id="updateEmployee" parameterType="com.feng.pojo.Employee" flushCache="true">
         update project_one.users
-        set username = #{username},
-            password=#{password},
-            gender=#{gender},
-            mobile=#{mobile},
-            birthday=#{birthday},
-            created_time=#{created_time}
+            <set>
+                <if test="username!=null">
+                    username=#{username},
+                </if>
+                <if test="password!=null">
+                    password = #{password},
+                </if>
+                <if test="gender!=null">
+                    gender=#{gender},
+                </if>
+                <if test="mobile!=null">
+                    mobile=#{mobile},
+                </if>
+                <if test="birthday!=null">
+                    birthday=#{birthday},
+                </if>
+                <if test="created_time!=null">
+                    created_time=#{created_time},
+                </if>
+            </set>
         where id=#{id};
     </update>
 
@@ -47,13 +61,14 @@
                 username = #{username} AND password=#{password}
     </select>
 
-    <select id="usernameIsExist" resultType="com.feng.pojo.Employee" flushCache="true">
-        select * from project_one.users
-        where username =#{username}
+    <select id="usernameIsExist" resultType="Integer" flushCache="true">
+        select count(username)
+        from project_one.users
+        where (username=#{username})
     </select>
 
-    <select id="userAndPasswordIsExist" resultType="com.feng.pojo.Employee" flushCache="true">
-        select * from project_one.users
-        where username=#{username} AND password =#{password};
+    <select id="userAndPasswordIsExist" resultType="Integer" flushCache="true">
+        select count(*) from project_one.users
+        where username=#{username} and password =#{password};
     </select>
 </mapper>

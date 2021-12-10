@@ -6,13 +6,11 @@ import com.feng.util.GetDataUtils;
 import com.feng.util.JSONResult;
 import com.feng.util.TokenUtils;
 import com.google.gson.Gson;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,8 +38,8 @@ public class UpdateController extends HttpServlet {
         }
         String substring = authorization.substring(7);
         Integer verify = TokenUtils.verify(substring);
-        String format1 =(format.format(new Date()));
-        String format2 = format.format(TokenUtils.datadecode(substring));
+        String format1 =format.format(new Date());
+        String format2 = UpdateController.format.format(TokenUtils.datadecode(substring));
         int i = format1.compareTo(format2);
         if (i>1){
             resp.getWriter().write(new Gson().toJson( JSONResult.errorMsg("token验证过期，请重新认证")));

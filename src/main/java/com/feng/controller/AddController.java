@@ -6,6 +6,8 @@ import com.feng.util.GetDataUtils;
 import com.feng.util.JSONResult;
 import com.feng.util.TokenUtils;
 import com.google.gson.Gson;
+import org.apache.commons.lang.StringUtils;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,8 +50,12 @@ public class AddController extends HttpServlet {
         //增加用户信息
         String postData = GetDataUtils.getPostData(req);
         Employee employee1 =  new Gson().fromJson(postData, Employee.class);
-        Employee employee2 = empService.userIsExist(employee1.getUsername());
-        if (employee2!=null){
+        if (StringUtils.isBlank(employee1.getUsername())){
+            resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("用户名不能为空")));
+            return;
+        }
+        Integer employee2 = empService.userIsExist(employee1.getUsername());
+        if (employee2==1){
             resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("用户名已经存在,无法增加用户")));
             return;
         }
