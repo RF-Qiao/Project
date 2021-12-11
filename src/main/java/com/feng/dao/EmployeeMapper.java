@@ -44,7 +44,6 @@ import java.util.List;
          */
         Employee login(@Param("username") String username,
                        @Param("password") String password);
-
         /**
          * 判断用户名是否存在
          * @param username

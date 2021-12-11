@@ -36,11 +36,8 @@ public class QueryController extends HttpServlet {
         }
         String substring = authorization.substring(7);
         Integer verify = TokenUtils.verify(substring);
-        String format1 =(format.format(new Date()));
-        String format2 = format.format(TokenUtils.datadecode(substring));
-        System.out.println("查询所有消息=================="+format2);
-        int i = format1.compareTo(format2);
-        if (i>=0){
+        int i = new Date().compareTo(TokenUtils.datadecode(substring));
+        if (i==1){
             resp.getWriter().write(new Gson().toJson( JSONResult.errorMsg("token验证过期，请重新认证")));
             return;
         }

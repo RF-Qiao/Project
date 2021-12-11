@@ -1,6 +1,4 @@
 package com.feng.util;
-//import javax.servlet.http.HttpServletRequest;
-//import java.io.BufferedReader;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;

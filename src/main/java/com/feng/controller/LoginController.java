@@ -35,7 +35,6 @@ public class LoginController extends HttpServlet {
             return;
         }
         Integer employee1 = empService.userAndPasswordIsExist(username, password);
-        System.out.println("=================="+employee1);
         if (employee1==0){
             resp.getWriter().write(new Gson().toJson(JSONResult.errorMsg("用户名或密码不正确")));
             return;

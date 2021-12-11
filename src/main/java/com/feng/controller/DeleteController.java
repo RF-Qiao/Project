@@ -39,11 +39,8 @@ public class DeleteController extends HttpServlet {
         }
         String substring = authorization.substring(7);
         Integer verify = TokenUtils.verify(substring);
-
-        String format1 =format.format(new Date());
-        String format2 = format.format(TokenUtils.datadecode(substring));
-        int i = format1.compareTo(format2);
-        if (i>1){
+        int i = new Date().compareTo(TokenUtils.datadecode(substring));
+        if (i==1){
             resp.getWriter().write(new Gson().toJson( JSONResult.errorMsg("token验证过期，请重新认证")));
             return;
         }

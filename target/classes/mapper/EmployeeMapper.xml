@@ -19,7 +19,7 @@
 
     <delete id="deleteEmployee" flushCache="true" >
         delete from
-                    project_one.users
+        project_one.users
         where
               id=#{id}
     </delete>
